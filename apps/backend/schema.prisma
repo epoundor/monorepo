@@ -1,0 +1,147 @@
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ProofOfLifeStatus {
+  VALID
+  INVALID
+  PENDING
+}
+
+enum UserRole {
+  ADMIN
+  AGENT
+}
+
+model RegistrationNumber {
+  registrationNumber String @unique @map("registration_number")
+}
+
+model User {
+  id String @id
+  firstName String @map("first_name")
+  lastName String @map("last_name")
+  email String
+  password String
+  role UserRole
+  enable Boolean @default(true)
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+
+  @@unique([email, deleted], name: "emailAndDeleted")
+}
+
+model Device {
+  id String @id
+  reference String
+  enable Boolean @default(false)
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  deviceAssignments DeviceAssignment[]
+  proofOfLifes ProofOfLife[]
+  compliance Boolean @default(true)
+
+  @@unique([reference, deleted], name: "referenceAndDeleted")
+}
+
+model ProofOfLife {
+  id String @id
+  registrationNumber String @map("registration_number")
+  npi String
+  firstName String @map("first_name")
+  lastName String @map("last_name")
+  phone String?
+  dateOfBirth DateTime @map("birth_date")
+  placeOfBirth String @map("birth_place")
+  cardNumber String @map("card_number")
+  deviceProofId String @unique @map("device_proof_id")
+  profession String
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  device Device @relation(fields: [deviceId], references: [id])
+  deviceId String
+  status ProofOfLifeStatus @default(PENDING)
+  proofDeviceCreatedDate DateTime @map("proof_device_created_date")
+}
+
+model DeviceAssignment {
+  id String @id
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  common Common @relation(fields: [commonId], references: [id])
+  commonId String
+  borough Borough @relation(fields: [boroughId], references: [id])
+  boroughId String
+  district District @relation(fields: [districtId], references: [id])
+  districtId String
+  device Device @relation(fields: [deviceId], references: [id])
+  deviceId String
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+}
+
+model Department {
+  id String @id
+  code String
+  name String
+  commons Common[]
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  deviceAssignments DeviceAssignment[]
+
+  @@unique([code, deleted], name: "codeAndDeleted")
+}
+
+model Common {
+  id String @id
+  code String
+  name String
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  boroughs Borough[]
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  deviceAssignments DeviceAssignment[]
+
+  @@unique([code, deleted], name: "codeAndDeleted")
+}
+
+model Borough {
+  id String @id
+  code String
+  name String
+  common Common @relation(fields: [commonId], references: [id])
+  commonId String
+  districts District[]
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  deviceAssignments DeviceAssignment[]
+
+  @@unique([code, deleted], name: "codeAndDeleted")
+}
+
+model District {
+  id String @id
+  code String
+  name String
+  borough Borough @relation(fields: [boroughId], references: [id])
+  boroughId String
+  createdAt DateTime? @map("created_at") @default(now())
+  updatedAt DateTime? @map("updated_at") @updatedAt
+  deleted Boolean @default(false)
+  deviceAssignments DeviceAssignment[]
+
+  @@unique([code, deleted], name: "codeAndDeleted")
+}

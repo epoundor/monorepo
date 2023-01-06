@@ -1,0 +1,19 @@
+{
+  "name": "@preuve-de-vie/functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/opensi/preuve-de-vie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/opensi/preuve-de-vie/issues"
+  },
+  "homepage": "https://gitlab.com/opensi/preuve-de-vie#readme"
+}

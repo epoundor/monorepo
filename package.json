@@ -1,0 +1,8 @@
+{
+  "name": "preuve-de-vie",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}

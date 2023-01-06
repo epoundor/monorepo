@@ -1,0 +1,62 @@
+version: "3.7"
+services:
+  db_postgres:
+    image: postgres:14-alpine
+    container_name: db-preuve-de-vie-prod
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER:-opensiuser}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-opensi}
+      POSTGRES_DB: 'preuvedevie-prod'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - kkiapaycdn_default
+
+
+  migrate:
+    build:
+      context: ./backend
+    image: eu.gcr.io/kkiapay/preuvedevie/backend:prod
+    container_name: migrate-preuvedevie-prod
+    environment:
+      - DATABASE_URL=postgresql://opensiuser:opensi@db_postgres:5432/preuvedevie-prod
+    depends_on:
+      - db_postgres
+    # command: npm run db:init 
+    command: npm run db:migrate-up
+    networks:
+      - kkiapaycdn_default
+
+  backend:
+    build:
+      context: ./backend
+    image: eu.gcr.io/kkiapay/preuvedevie/backend:prod
+    ports:
+      - "9811:3008"
+    container_name: backend-preuvedevie-prod
+    env_file:
+      - ./backend/.env
+    environment:
+      - DATABASE_URL=postgresql://opensiuser:opensi@db_postgres:5432/preuvedevie-prod
+    networks:
+      - kkiapaycdn_default
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  
+  frontend:
+    build:
+      context: ./frontend
+    image: eu.gcr.io/kkiapay/preuvedevie/frontend:prod
+    ports:
+      - "9812:80"
+    container_name: frontend-preuvedevie-prod
+    networks:
+      - kkiapaycdn_default
+
+volumes:
+  postgres: ~
+
+networks:
+  kkiapaycdn_default:
