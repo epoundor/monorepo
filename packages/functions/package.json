@@ -8,5 +8,8 @@
   },
   "dependencies": {
     "luxon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.2.0"
   }
 }
