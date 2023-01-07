@@ -1,4 +1,4 @@
-import { apiCall } from "./index";
+import { apiCall } from "@monorepo/api";
 
 export type ToDo = {
   userId: number;
@@ -17,13 +17,13 @@ export type Post = {
 export type CreatePost = Omit<Post, "id">;
 
 export function useFetchTodo() {
-  return apiCall<ToDo>("/todos/:id", {
-    method: "GET",
+  return apiCall("/api/devices", {
+    method: "get",
   });
 }
 
 export function useCreateTodo() {
-  return apiCall<ToDo, CreatePost>("/posts", {
-    method: "POST",
+  return apiCall("/api/devices/{id}", {
+    method: "get",
   });
 }

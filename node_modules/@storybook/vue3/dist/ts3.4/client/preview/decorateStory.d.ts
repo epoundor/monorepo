@@ -1,0 +1,3 @@
+import { DecoratorFunction, LegacyStoryFn } from '@storybook/csf';
+import { VueFramework } from './types-6-0';
+export declare function decorateStory(storyFn: LegacyStoryFn<VueFramework>, decorators: DecoratorFunction<VueFramework>[]): LegacyStoryFn<VueFramework>;

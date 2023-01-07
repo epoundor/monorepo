@@ -1,5 +1,5 @@
 {
-  "name": "@preuve-de-vie/backend",
+  "name": "@monorepo/backend",
   "version": "1.0.0",
   "description": "<p align=\"center\">   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo-small.svg\" width=\"200\" alt=\"Nest Logo\" /></a> </p>",
   "author": "",
@@ -26,7 +26,7 @@
     "clean": "ts-node prisma/seed/clean.ts"
   },
   "dependencies": {
-    "@preuve-de-vie/types": "1.0.0",
+    "@monorepo/types": "1.0.0",
     "@faker-js/faker": "^7.6.0",
     "@nestjs/axios": "^1.0.0",
     "@nestjs/common": "^9.0.0",

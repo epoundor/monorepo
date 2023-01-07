@@ -1,19 +1,12 @@
 {
-  "name": "@preuve-de-vie/functions",
+  "name": "@monorepo/functions",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/opensi/preuve-de-vie.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/opensi/preuve-de-vie/issues"
-  },
-  "homepage": "https://gitlab.com/opensi/preuve-de-vie#readme"
+  "dependencies": {
+    "luxon": "^3.1.0"
+  }
 }

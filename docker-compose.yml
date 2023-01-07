@@ -2,7 +2,7 @@ version: "3.7"
 services:
   db_postgres:
     image: postgres:14-alpine
-    container_name: db-preuve-de-vie-prod
+    container_name: db-monorepo-prod
     environment:
       POSTGRES_USER: ${POSTGRESQL_USER:-opensiuser}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-opensi}

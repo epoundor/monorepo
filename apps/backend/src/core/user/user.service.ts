@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from 'src/prisma.service';
 import { User } from '@prisma/client';
 import * as _ from 'lodash';
-import { Collection } from '@preuve-de-vie/types';
+import { Collection } from '@monorepo/types';
 
 @Injectable()
 export class UserService {

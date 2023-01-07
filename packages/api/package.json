@@ -1,0 +1,14 @@
+{
+    "name": "@monorepo/api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@monorepo/types": "1.0.0",
+        "axios": "^1.1.3",
+        "path-to-regexp": "^6.2.1"
+    }
+}

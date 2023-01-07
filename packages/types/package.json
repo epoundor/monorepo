@@ -1,5 +1,5 @@
 {
-  "name": "@preuve-de-vie/types",
+  "name": "@monorepo/types",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",

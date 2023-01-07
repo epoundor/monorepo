@@ -1,8 +1,11 @@
 {
-  "name": "preuve-de-vie",
+  "name": "monorepo",
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*"
-  ]
+    "apps/frontend"
+  ],
+  "devDependencies": {
+    "@types/luxon": "^3.2.0"
+  }
 }

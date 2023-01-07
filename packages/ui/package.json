@@ -1,5 +1,5 @@
 {
-  "name": "@preuve-de-vie/ui",
+  "name": "@monorepo/ui",
   "private": true,
   "version": "1.0.0",
   "type": "module",

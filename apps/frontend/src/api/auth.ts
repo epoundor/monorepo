@@ -1,7 +1,7 @@
-import { apiCall } from ".";
+import { apiCall } from "@monorepo/api";
 
 export default function useFetchAuthenticatedUser() {
-  return apiCall("auth/me", {
+  return apiCall("/api/auth/me", {
     immediate: true,
     method: "GET",
   });

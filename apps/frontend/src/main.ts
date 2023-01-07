@@ -1,19 +1,15 @@
 import { createApp } from "vue";
-import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import "./assets/main.css";
-import Application from "@/components/App.vue";
 
-import { registerRequestInterceptor, registerResponseInterceptor } from "./api";
-
-import { VDataTable, VModal, VConfirm } from "@preuve-de-vie/ui/Molecules";
 import {
-  VButton,
-  VLabel,
-  VPagination,
-  BaseInput,
-} from "@preuve-de-vie/ui/Atoms";
+  registerRequestInterceptor,
+  registerResponseInterceptor,
+} from "@monorepo/api";
+
+import { VDataTable, VModal, VConfirm } from "@monorepo/ui/Molecules";
+import { VButton, VLabel, VPagination, BaseInput } from "@monorepo/ui/Atoms";
 import Icon from "./components/Icon.vue";
 
 // import "./assets/tailwind";
@@ -31,10 +27,8 @@ registerRequestInterceptor((config: AxiosRequestConfig): AxiosRequestConfig => {
 });
 const app = createApp(App);
 // ---------- Plugins -------------
-app.use(createPinia());
 app.use(router);
 // ----------- Global Component ------------
-app.component("App", Application);
 app.component("Icon", Icon);
 app.component("VDataTable", VDataTable);
 app.component("VPagination", VPagination);
